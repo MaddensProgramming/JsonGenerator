@@ -14,6 +14,8 @@ namespace NewJsonGenerator
 
         public static Assembly LoadedAssembly { get; set; }
 
+        public static bool Refreshed { get; set; }
+
         public static Type[] TypeList { get; set; }
         public static Type[] FilteredTypelist { get; set; }
         public static SelectedItem Item { get; set; }
@@ -22,13 +24,17 @@ namespace NewJsonGenerator
 
         public JsonGeneratorWindow()
         {
-            InitializeComponent();      
-            VS.Windows.FindWindowAsync(Guid.Parse("7bdd0c95-ebd9-4e92-a6b8-a0dea12557b6")).Result.OnShow+=Show;
-        }
+            InitializeComponent();
+            this.Loaded += JsonGeneratorWindow_Loaded;
+         
+                
+        
+         }
 
-        private void Show(object sender, WindowFrameShowEventArgs e)
+        private void JsonGeneratorWindow_Loaded(object sender, RoutedEventArgs e)
         {
             ConfigureInputList();
+
         }
 
         private void UpdateButton(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -59,7 +65,7 @@ namespace NewJsonGenerator
                 Item.ProjectItem.ProjectItems.AddFromFile(SavingPath.Text);
 
 
-                await VS.Windows.GetCurrentWindowAsync().Result.CloseFrameAsync(FrameCloseOption.NoSave);
+                await VS.Windows.FindWindowAsync(Guid.Parse("7bdd0c95-ebd9-4e92-a6b8-a0dea12557b6")).Result.CloseFrameAsync(FrameCloseOption.NoSave);
 
             }
             catch (Exception ex)

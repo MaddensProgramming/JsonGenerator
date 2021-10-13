@@ -18,7 +18,7 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="TypeGrid" ItemsSource="{Binding}"  AutoGenerateColumns="False" SelectionChanged="UpdateButton" IsReadOnly="True" GridLinesVisibility="None" >
+        <DataGrid Grid.Row="0" x:Name="TypeGrid" ItemsSource="{Binding Type, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"  AutoGenerateColumns="False" SelectionChanged="UpdateButton" IsReadOnly="True" GridLinesVisibility="None" >
             <DataGrid.Columns>
                 <DataGridTextColumn Width="auto" Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
                 <DataGridTextColumn Width="auto" Header="NameSpace" Binding="{Binding Namespace}"></DataGridTextColumn>
